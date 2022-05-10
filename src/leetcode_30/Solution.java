@@ -36,6 +36,7 @@ public class Solution {
         if (substr.length() == 1) return next;
         next[1] = 0;
         if (substr.length() == 2) return next;
+
         int cn = 0;//初始代表next[1] = 0中的0;
         for (int i = 2; i < substr.length(); ) {
             if (substr.charAt(i - 1) == substr.charAt(cn)) next[i++] = ++cn;
