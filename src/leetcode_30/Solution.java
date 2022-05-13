@@ -187,8 +187,8 @@ public class Solution {
     public List<Integer> huadongchuangkouPlus(String s, String[] words) {
         List<Integer> ans = new ArrayList<>();
         if (s == null || words == null || s.length() == 0 || words.length == 0 || words[0].length() == 0) return ans;
-        int wordLen = words[0].length();
-        int windowLen = words.length * wordLen;
+        final int wordLen = words[0].length();
+        final int windowLen = words.length * wordLen;
         Map<String, Integer> map = new HashMap<>();
         for (String word : words) {
             map.put(word, map.getOrDefault(word, 0) + 1);
@@ -210,7 +210,36 @@ public class Solution {
                 }
                 if (count == words.length) {//里层循环完美执行完时
                     ans.add(left);
-                    left += wordLen;
+                    int extraWordIndex = left + windowLen;
+                    int i = 0;
+                    for (; i < windowLen &&
+                            extraWordIndex + wordLen - 1 < s.length(); i += wordLen, extraWordIndex += wordLen) {
+                        String firstWord = window.substring(i, i + wordLen);
+                        String extraWord = s.substring(extraWordIndex, extraWordIndex + wordLen);
+                        if (firstWord.equals(extraWord)) {
+                            ans.add(left + i + wordLen);
+                        } else break;
+                    }
+                    /*
+                    此时跳出循环的情况有
+                        ①、因break退出，此时extraWordIndex指向extraWord的第一个字符的索引，且extraWord!=对应的firstWord
+                        此时，应该讨论left应该移动至extraWordIndex处还是windows里firstWord及其后某处
+                        ②、因i<window退出，此时extraWordIndex-wordLen处单词与window的最后一个单词词相同且已经保存结果
+                        此时，left移动至extraWordIndex即可
+                        ③、因extraWordIndex + wordLen - 1 < s.length()退出，此时extraWordIndex-wordLen处单词
+                        结尾的window都满足且保存了，此时，left移动至extraWordIndex即可
+                     */
+                    if (i < windowLen &&
+                            extraWordIndex + wordLen - 1 < s.length()) {
+                        //①
+                        if (map.containsKey(s.substring(extraWordIndex, extraWordIndex + wordLen))) {
+                            left += i + wordLen;
+                        } else left = extraWordIndex + wordLen;
+                    } else {
+                        //②，③
+                        //left = extraWordIndex;
+                        left += i+wordLen;
+                    }
                 } else if (!map.containsKey(currentWord)) {//里层循环因map.containsKey(currentWord)跳出时
                     left += index + wordLen;
                 } else {//里层循环因map2.getOrDefault(currentWord, 0) < map.get(currentWord)跳出时
@@ -300,12 +329,13 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        String s = "wordgoodgoodgoodbestword";
-        String[] words = new String[]{"word", "good", "best", "good"};
+        String s = "aaaaaaaaaaaaaa";
+        String[] words = new String[]{"aa","aa"};
         Solution solution = new Solution();
 //        System.out.println(solution.findSubstring(s, words));
 //        System.out.println(solution.huadongchaungkou(s, words));
 //        System.out.println(solution.huadongchaungkou2(s, words));
-        System.out.println(solution.bierendexiefa(s, words));
+        System.out.println(solution.huadongchuangkouPlus(s, words));
+//        System.out.println(solution.bierendexiefa(s, words));
     }
 }
