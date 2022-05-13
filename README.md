@@ -1,2 +1,2 @@
 # leetcode
-自己的leetcode 刷题记录
+自己的leetcode刷题记录
