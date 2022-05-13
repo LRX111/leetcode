@@ -20,15 +20,15 @@ public class Solution {
                     }
                 }
                 //将 nums[i]~nums[len-1] 从小到大排列（**nums[i]~nums[len-1]本身为倒序**）
-                int[] cutnums = new int[nums.length - i];
-                System.arraycopy(nums, i, cutnums, 0, cutnums.length);
+//                int[] cutnums = new int[nums.length - i];
+//                System.arraycopy(nums, i, cutnums, 0, cutnums.length);
 //                Arrays.sort(cutnums);
-                for (int left = 0, right = cutnums.length - 1; left < right; left++, right--) {
-                    int temp = cutnums[left];
-                    cutnums[left] = cutnums[right];
-                    cutnums[right] = temp;
+                for (int left = i, right = nums.length - 1; left < right; left++, right--) {
+                    int temp = nums[left];
+                    nums[left] = nums[right];
+                    nums[right] = temp;
                 }
-                System.arraycopy(cutnums, 0, nums, i, cutnums.length);
+//                System.arraycopy(cutnums, 0, nums, i, cutnums.length);
                 break;
             }
         }
@@ -42,7 +42,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,1,5};
+        int[] nums = {1,3,4,2};
         Solution solution = new Solution();
         solution.nextPermutation(nums);
         System.out.println(Arrays.toString(nums));
