@@ -16,6 +16,6 @@ public class SolutionTest {
     public void test_searchRange() {
         int[] nums = {5, 7, 7, 8, 8, 10};
         int target = 8;
-        Assert.assertEquals(solution.searchRange(nums, target), new int[]{3, 4});
+        Assert.assertEquals(solution.Real_searchRange(nums, target), new int[]{3, 4});
     }
 }
