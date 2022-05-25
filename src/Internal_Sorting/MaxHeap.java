@@ -100,10 +100,26 @@ public class MaxHeap<E> {
      * 将已有元素构建为堆
      */
     public void BuildHeap() {
-        currentSize=maxSize;
+        currentSize = maxSize;
         for (int i = (maxSize - 2) >> 1; i >= 0; i--) {
             SiftDown(i);
         }
+    }
+
+    /**
+     * 判断堆是否为空
+     *
+     * @return
+     */
+    public boolean isEmpty() {
+        return currentSize == 0 ? true : false;
+    }
+
+    /**
+     * 清空堆中元素
+     */
+    public void clear() {
+        maxSize = currentSize = 0;
     }
 
     /**
@@ -227,17 +243,31 @@ public class MaxHeap<E> {
      */
     public void add(E element) {
         if (maxSize == heapArray.length) grow();
-        maxSize++;
-        heapArray[currentSize++] = element;
-        SiftUp(currentSize - 1);
+        heapArray[maxSize++] = element;
+        if (maxSize > currentSize)
+            BuildHeap();
+        else SiftUp(maxSize - 1);
     }
 
     /**
-     * 从堆中删除并返回堆顶元素
+     * 删除并返回堆顶元素
      *
      * @return
      */
     public E remove() {
+        if (currentSize == 0) {
+            return null;
+        }
+        maxSize--;
+        return getTop();
+    }
+
+    /**
+     * 获得堆顶元素并从堆中移除堆顶元素（但是并不是删除该元素）
+     *
+     * @return
+     */
+    public E getTop() {
         if (currentSize == 0) {
             return null;
         }
@@ -273,6 +303,7 @@ public class MaxHeap<E> {
             else SiftDown(position);
 
         }
+        maxSize--;
         return (E) temp;
     }
 
@@ -283,7 +314,7 @@ public class MaxHeap<E> {
      */
     public E[] sort() {
         while (currentSize > 0) {
-            remove();
+            getTop();
         }
         return (E[]) Arrays.copyOf(heapArray, maxSize);
     }
