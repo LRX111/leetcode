@@ -60,39 +60,48 @@ public class MaxHeap<E> {
         heapArray = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
         comparator = null;
         currentSize = 0;
-        if (array.length > DEFAULT_CAPACITY)
+        maxSize = array.length;
+        if (array.length > DEFAULT_CAPACITY) {
             grow(array.length);
-        else if (array.length > 0) {
+            for (int e : array) {
+                heapArray[currentSize++] = e;
+            }
+            BuildHeap();
+        } else if (array.length > 0) {
             grow();
             for (int e : array) {
                 heapArray[currentSize++] = e;
             }
             BuildHeap();
         }
-        maxSize = array.length;
     }
 
     public MaxHeap(double[] array) {
         heapArray = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
         comparator = null;
         currentSize = 0;
-        if (array.length > DEFAULT_CAPACITY)
+        maxSize = array.length;
+        if (array.length > DEFAULT_CAPACITY) {
             grow(array.length);
-        else if (array.length > 0) {
+            for (double e : array) {
+                heapArray[currentSize++] = e;
+            }
+            BuildHeap();
+        } else if (array.length > 0) {
             grow();
             for (double e : array) {
                 heapArray[currentSize++] = e;
             }
             BuildHeap();
         }
-        maxSize = array.length;
     }
 
     /**
      * 将已有元素构建为堆
      */
     public void BuildHeap() {
-        for (int i = (currentSize - 2) >> 1; i >= 0; i--) {
+        currentSize=maxSize;
+        for (int i = (maxSize - 2) >> 1; i >= 0; i--) {
             SiftDown(i);
         }
     }
