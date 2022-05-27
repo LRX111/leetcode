@@ -35,7 +35,7 @@ public class Solution {
                 }
             }
         }
-//        printBoard(board);
+        printBoard(board);
 //        System.out.println("行候选：");
 //        for (Set<Integer> set : rowsCandidate) {
 //            System.out.println(set);
@@ -106,7 +106,7 @@ public class Solution {
                                         Set<Integer>[] colsCandidate,
                                         Set<Integer>[] subboxesCandidate) {
         if (index == 81) {
-            printBoard(board);
+//            printBoard(board);
             return isvalid(board);
         }
         int row = index / 9;
@@ -158,7 +158,7 @@ public class Solution {
         return true;
     }
 
-    private void printBoard(char[][] board) {
+    public void printBoard(char[][] board) {
         System.out.print("[");
         for (int i = 0; i < board.length; i++) {
             if (i != 0) System.out.print(' ');
