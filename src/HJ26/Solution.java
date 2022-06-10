@@ -26,11 +26,12 @@ public class Solution {
                 Character b = sb.charAt(i);
                 Character bcompare = b <= 'Z' ? b : (char) (b - 32);
                 if (bcompare > acompare) {
-                    sb.append(" ");
-                    for (int j = sb.length() - 2; j >= i; j--) {
-                        sb.setCharAt(j + 1, sb.charAt(j));
-                    }
-                    sb.setCharAt(i, a);
+//                    sb.append(" ");
+//                    for (int j = sb.length() - 2; j >= i; j--) {
+//                        sb.setCharAt(j + 1, sb.charAt(j));
+//                    }
+//                    sb.setCharAt(i, a);
+                    sb.insert(i, a);
                     break;
                 }
             }
@@ -43,13 +44,15 @@ public class Solution {
             Set<Character> characters = map.keySet();
             Iterator<Character> iterator = characters.iterator();
             while (iterator.hasNext()) {
-                sb.append(" ");
+//                sb.append(" ");
                 Character ch = iterator.next();
                 int index = map.get(ch);
-                for (int i = sb.length() - 2; i >= index; i--) {
-                    sb.setCharAt(i + 1, sb.charAt(i));
-                }
-                sb.setCharAt(index, ch);
+//                for (int i = sb.length() - 2; i >= index; i--) {
+//                    sb.setCharAt(i + 1, sb.charAt(i));
+//                }
+//                sb.setCharAt(index, ch);
+                sb.insert(index, ch);
+
             }
         }
         return sb.toString();
