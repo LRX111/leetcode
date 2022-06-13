@@ -1,7 +1,5 @@
 package leetcode_16;
 
-import Internal_Sorting.InternalSorting;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
