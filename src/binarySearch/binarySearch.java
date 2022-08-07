@@ -3,7 +3,7 @@ package binarySearch;
 import java.util.Scanner;
 
 public class binarySearch {
-    public static int binarySearch(int[] a, int x) {
+    public static int theBinarySearch(int[] a, int x) {
         int left = 0, right = a.length - 1;
         int mid = (left + right) / 2;
         while (right >= left) {
@@ -28,7 +28,7 @@ public class binarySearch {
             x = scan.nextInt();
         }
         scan.close();
-        System.out.println("x的元素下标是：" + binarySearch(a, x));
+        System.out.println("x的元素下标是：" + theBinarySearch(a, x));
 
     }
 }
